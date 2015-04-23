@@ -1,0 +1,19 @@
+{
+  "name": "es6-systemjs",
+  "version": "0.0.0",
+  "authors": [
+    "Abhishek Jain <abhi2000@gmail.com>"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "traceur-runtime": "0.0.74",
+    "system.js": "~0.10.2"
+  }
+}
