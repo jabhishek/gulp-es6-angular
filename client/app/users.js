@@ -1,6 +1,6 @@
 class MainController {
     constructor() {
-        this.users = ['Abhi', 'Paul', 'Adrian', 'Barney'];
+        this.users = ['Abhishek', 'Paul', 'Adrian', 'Barney'];
     }
 }
 export { MainController }

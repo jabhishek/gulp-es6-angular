@@ -9,7 +9,7 @@ var app = express();
 
 if (app.get("env") === "development") {
     app.use(morgan('dev'));
-    //app.use(require('connect-livereload')());
+    app.use(require('connect-livereload')());
     appPath = path.join(rootPath, 'client');
 }
 
