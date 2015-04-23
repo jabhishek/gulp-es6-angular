@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html data-app>
 <head lang="en">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width">
@@ -7,23 +7,27 @@
     <title>Angular ES6 App</title>
 </head>
 <body>
-<div>Hello World</div>
+
+<label for="name">Name: </label>
+<input type="text" id="name" ng-model="user.name"/>
+
+<div>
+    Hello {{ user.name }}
+</div>
 
 
- <!-- Dev -->
-<!--
+<!-- Dev - load individual es6 file, with system.js and module loader polyfill-->
 <script src="/components/traceur/traceur.js"></script>
 <script src="/components/traceur-runtime/traceur-runtime.js"></script>
 <script src="/components/es6-module-loader/dist/es6-module-loader.src.js"></script>
 <script src="/components/system.js/dist/system.src.js"></script>
 <script src="/system.config.js"></script>
 <script>
-    System.import('app/app');
+    System.import('app/es6/bootstrap');
 </script>
--->
 
-<!-- Production - To run build files, created by builder.js -->
-<script src="/components/traceur-runtime/traceur-runtime.js"></script>
-<script src="/app/es5/bundle.js"></script>
+<!-- Production - To load build files, created by builder.js -->
+<!--<script src="/components/traceur-runtime/traceur-runtime.js"></script>
+<script src="/app/es5/bundle.js"></script>-->
 </body>
 </html>

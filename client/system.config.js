@@ -5,5 +5,11 @@ System.config({
 	/* https://github.com/google/traceur-compiler/blob/master/src/Options.js */
 	traceurOptions: {
 		symbols: true
+	},
+	meta: {
+		'components/angular/angular': {format: 'global', exports: 'angular'}
+	},
+	map: {
+		'angular': 'components/angular/angular'
 	}
 });
