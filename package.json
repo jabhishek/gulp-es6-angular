@@ -11,6 +11,7 @@
   "dependencies": {
     "connect-livereload": "^0.5.3",
     "express": "^4.12.3",
-    "morgan": "^1.5.2"
+    "morgan": "^1.5.2",
+    "systemjs-builder": "^0.10.4"
   }
 }
