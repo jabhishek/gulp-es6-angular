@@ -16,7 +16,7 @@ gulp.task('es6-build', function(cb) {
 			builder.config({ baseURL: 'file:' + baseUrl });
 
 			// Build a self-executing bundle (ie. Has SystemJS built in and auto-imports the 'app' module)
-			return builder.buildSFX('app', 'client/app/bundle.js', { minify: true, sourceMaps: true, runtime: false});
+			return builder.buildSFX('es6/app', 'client/app/es5/bundle.js', { minify: true, sourceMaps: true, runtime: false});
 		}).catch(function(err) {
 			console.error(err);
 		});
@@ -29,13 +29,6 @@ gulp.task('watch', function() {
 	gulp.watch([
 		'client/index.html', 'client/**/bundle.js'
 	], $gulp.livereload.changed);
-/*
-	gulp.watch([
-		'client/index.html', 'client/!**!/bundle.js'
-	]).on('change', function (file) {
-		console.log(file);
-		$gulp.livereload.changed();
-	});*/
 });
 
 gulp.task('server:start', function() {
