@@ -28,7 +28,7 @@ gulp.task('es6-build:app', function (cb) {
 	// Ignore the last line -- Not Using SFX anymore because it (at the moment) forces you to create one large monolithic bundle with all the external files....
 	// https://github.com/systemjs/builder/issues/108
 
-	// Creating different bundles for vendors and source files -- may change in future
+	// Creating different bundles for vendors and app files -- may change in future
 	builder.build('app/bootstrap - [components/angular/angular]', 'client/build/es5/app.js', {minify: false, sourceMaps: false, runtime: false});
 	cb();
 });
@@ -46,17 +46,23 @@ gulp.task('es6-build:vendors', function (cb) {
 	// Ignore the last line -- Not Using SFX anymore because it (at the moment) forces you to create one large monolithic bundle with all the external files....
 	// https://github.com/systemjs/builder/issues/108
 
-	// Creating different bundles for vendors and source files -- may change in future
+	// Creating different bundles for vendors and app files -- may change in future
 	builder.build('components/angular/angular', 'client/build/es5/vendors.js', {minify: true, sourceMaps: false, runtime: false});
 	cb();
 });
 
 gulp.task('watch', function () {
 	"use strict";
-	gulp.watch(['client/app/**/*.js'], ['es6-build:app']);
+	/*If running es6 files*/
 	gulp.watch([
-		'client/index.html', 'client/build/**/*'
+		'client/index.html', 'client/app/**/*'
 	], $gulp.livereload.changed);
+
+	/*If running build files*/
+/*	gulp.watch(['client/app/!**!/!*.js'], ['es6-build:app']);
+	gulp.watch([
+		'client/index.html', 'client/build/!**!/!*'
+	], $gulp.livereload.changed);*/
 });
 
 gulp.task('server:start', ['es6-build'], function () {
