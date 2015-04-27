@@ -1,0 +1,34 @@
+/**
+ * app.less
+ * Created by ajain on 27/04/2015.
+ */
+
+@import 'globals/lesshat.less';
+@import 'globals/variables.less';
+@import 'globals/mixins.less';
+@import 'globals/reset.less';
+
+.clearfix {
+  &:after, &:before {
+    content: " ";
+    clear: both;
+  }
+}
+
+html {
+  font-family: @font-family;
+  background-color: @page-background;
+  color: #555;
+  color: @text-color;
+  font-size: 50%;
+  height: 100%;
+  min-width: 300px;
+
+  @media @tablets {
+    font-size: 62.5%;
+  }
+}
+
+body{
+  font-size: 1.6rem;
+}

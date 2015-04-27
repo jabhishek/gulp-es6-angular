@@ -5,8 +5,11 @@
     <meta name="viewport" content="width=device-width">
     <base href="/"/>
     <title>Angular ES6 App</title>
+    <link href='//fonts.googleapis.com/css?family=Raleway' rel='stylesheet' type='text/css'>
+    <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="build/css/app.css"/>
 </head>
-<body>
+<body ng-cloak>
 
 <label for="name">Name: </label>
 <input type="text" id="name" ng-model="user.name"/>
@@ -17,25 +20,25 @@
 
 
 <!-- Dev - load individual es6 file, with system.js and module loader polyfill-->
-<script src="/components/traceur/traceur.js"></script>
+<!--<script src="/components/traceur/traceur.js"></script>
 <script src="/components/traceur-runtime/traceur-runtime.js"></script>
 <script src="/components/es6-module-loader/dist/es6-module-loader.src.js"></script>
 <script src="/components/system.js/dist/system.src.js"></script>
 <script src="/system.config.js"></script>
 <script>
     System.import('app/bootstrap');
-</script>
+</script>-->
 
-<!-- Production - To load build files, created by builder.js -->
-<!--
-<script src="/components/es6-module-loader/dist/es6-module-loader.js"></script>
+<!-- To load build files, created by builder.js -->
+<!--<script src="/components/es6-module-loader/dist/es6-module-loader.js"></script>
 <script src="/components/traceur-runtime/traceur-runtime.min.js"></script>
-<script src="/components/system.js/dist/system.js"></script>
-<script src="/build/es5/vendors.js"></script>
-<script src="/build/es5/app.js"></script>
+<script src="/components/system.js/dist/system.js"></script>-->
+ <!--Systemjs / traceur / es6-module-loader bundled into one file-->
+<script src="/build/scripts/systemjs-dep.min.js"></script>
+<script src="/build/scripts/vendors.js"></script>
+<script src="/build/scripts/app.js"></script>
 <script>
     System.import('app/bootstrap');
 </script>
--->
 </body>
 </html>
