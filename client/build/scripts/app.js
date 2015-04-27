@@ -28,6 +28,7 @@ System.register("app/bootstrap", ["components/angular/angular", "app/main"], fun
     }],
     execute: function() {
       angular.element(document).ready(function() {
+        'use strict';
         angular.bootstrap(document.querySelector('[data-app]'), [mainModule.name], {strictDi: true});
       });
     }

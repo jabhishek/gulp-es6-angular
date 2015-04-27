@@ -25,22 +25,29 @@ gulp.task('css', function() {
 		//.pipe(minify())
 		//.pipe($gulp.rev())
 		.pipe(gulp.dest('client/build/css/'))
-		.pipe($gulp.size({showFiles: true}));
+		.pipe($gulp.size({showFiles: false}));
 });
 
+
+gulp.task('jshint', function () {
+	return gulp.src(['client/app/**/*.js'])
+	//	.pipe($gulp.using())
+		.pipe($gulp.jshint())
+		.pipe($gulp.jshint.reporter('default'));
+});
 
 gulp.task('js', ['systemjs', 'es6-build:app', 'es6-build:vendors']);
 gulp.task('systemjs', function () {
 	return gulp.src(['client/components/es6-module-loader/dist/es6-module-loader.js',
 		'client/components/traceur-runtime/traceur-runtime.min.js',
 		'client/components/system.js/dist/system.js'])
-		.pipe($gulp.using())
+	//	.pipe($gulp.using())
 		.pipe($gulp.uglify())
 		.pipe($gulp.concat('systemjs-dep.min.js'))
 		.pipe(gulp.dest('client/build/scripts/'))
-		.pipe($gulp.size({showFiles: true}));
+		.pipe($gulp.size({showFiles: false}));
 });
-gulp.task('es6-build:app', function (cb) {
+gulp.task('es6-build:app', ['jshint'], function (cb) {
 	"use strict";
 	var builder = getBuilder();
 
