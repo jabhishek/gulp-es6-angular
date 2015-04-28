@@ -12,7 +12,8 @@ function getBuilder() {
 	// Change baseURL to match the file system
 	var baseUrl = path.resolve('./client');
 	builder.config({
-		baseURL: 'file:' + baseUrl
+		baseURL: 'file:' + baseUrl,
+		transpiler: 'babel'
 	});
 	return builder;
 }
@@ -39,7 +40,7 @@ gulp.task('jshint', function () {
 gulp.task('js', ['systemjs', 'es6-build:app', 'es6-build:vendors']);
 gulp.task('systemjs', function () {
 	return gulp.src(['client/components/es6-module-loader/dist/es6-module-loader.js',
-		'client/components/traceur-runtime/traceur-runtime.min.js',
+		'client/components/babel-core/browser.js',
 		'client/components/system.js/dist/system.js'])
 	//	.pipe($gulp.using())
 		.pipe($gulp.uglify())
