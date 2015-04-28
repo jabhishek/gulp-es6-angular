@@ -1,5 +1,9 @@
 import angular from 'angular';
+import homeModule from './home/index';
+import mainConfig from './mainConfig';
 
-console.log('Hi');
-
-export var mainModule = angular.module('mainModule', []);
+export var mainModule = angular.module('mainModule',
+	[
+		homeModule.name,
+		mainConfig.name
+	]);

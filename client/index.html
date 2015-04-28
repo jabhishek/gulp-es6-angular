@@ -11,30 +11,19 @@
 </head>
 <body ng-cloak>
 
-<label for="name">Name: </label>
-<input type="text" id="name" ng-model="user.name"/>
-
-<div>
-    Hello {{ user.name }}
-</div>
-
+<ui-view></ui-view>
 
 <!-- Dev - load individual es6 file, with system.js and module loader polyfill-->
-<!--<script src="/components/traceur/traceur.js"></script>
+<script src="/components/traceur/traceur.js"></script>
 <script src="/components/traceur-runtime/traceur-runtime.js"></script>
 <script src="/components/es6-module-loader/dist/es6-module-loader.src.js"></script>
 <script src="/components/system.js/dist/system.src.js"></script>
 <script src="/system.config.js"></script>
 <script>
     System.import('app/bootstrap');
-</script>-->
+</script>
 
 <!-- To load build files, created by builder.js -->
-<!--<script src="/build/scripts/systemjs-dep.min.js"></script>-->
-<!--<script src="/build/scripts/vendors.js"></script>-->
-<script src="/build/scripts/app.js"></script>
-<!--<script>
-    System.import('app/bootstrap');
-</script>-->
+<!--<script src="/build/scripts/app.js"></script>
 </body>
 </html>
