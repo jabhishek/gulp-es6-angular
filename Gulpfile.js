@@ -37,7 +37,7 @@ gulp.task('jshint', function () {
 		.pipe($gulp.jshint.reporter('default'));
 });
 
-gulp.task('js', ['systemjs', 'es6-build:app', 'es6-build:vendors']);
+/*gulp.task('js', ['systemjs', 'es6-build:app', 'es6-build:vendors']);*/
 gulp.task('systemjs', function () {
 	return gulp.src(['client/components/es6-module-loader/dist/es6-module-loader.js',
 		'client/components/babel-core/browser.js',
@@ -48,6 +48,7 @@ gulp.task('systemjs', function () {
 		.pipe(gulp.dest('client/build/scripts/'))
 		.pipe($gulp.size({showFiles: false}));
 });
+/*
 gulp.task('es6-build:app', ['jshint'], function (cb) {
 	"use strict";
 	var builder = getBuilder();
@@ -57,9 +58,22 @@ gulp.task('es6-build:app', ['jshint'], function (cb) {
 	// https://github.com/systemjs/builder/issues/108
 
 	// Creating different bundles for vendors and app files -- may change in future
-	builder.build('app/bootstrap - [components/*/*]', 'client/build/scripts/app.js', {minify: false, sourceMaps: false, runtime: false});
+	builder.build('app/bootstrap - [components/!*!/!*]', 'client/build/scripts/app.js', {minify: false, sourceMaps: false, runtime: false});
 	cb();
 });
+*/
+
+gulp.task('es6-buildsfx', ['jshint'], function (cb) {
+	"use strict";
+	var builder = getBuilder();
+
+	// Build a self-executing bundle (ie. Has SystemJS built in and auto-imports the 'app' module)
+	// gone back to build sfx file, although I am not happy with it... it was this or load systemjs and all other dependencies in browser
+	// https://github.com/systemjs/builder/issues/108
+	builder.buildSFX('app/bootstrap', 'client/build/scripts/app.js', {minify: false, sourceMaps: false, runtime: false});
+	cb();
+});
+/*
 gulp.task('es6-build:vendors', function (cb) {
 	"use strict";
 
@@ -67,11 +81,12 @@ gulp.task('es6-build:vendors', function (cb) {
 	builder.build('components/angular/angular', 'client/build/scripts/vendors.js', {minify: true, sourceMaps: false, runtime: false});
 	cb();
 });
+*/
 
 gulp.task('watch', function () {
 	"use strict";
 	gulp.watch(['client/content/**/*.less'], ['css']);
-	gulp.watch(['client/app/**/*.js'], ['es6-build:app']);
+	gulp.watch(['client/app/**/*.js'], ['es6-buildsfx']);
 
 	gulp.watch([
 		'client/index.html', 'client/build/**/*'
@@ -80,7 +95,7 @@ gulp.task('watch', function () {
 
 gulp.task('build:dev', ['js', 'css']);
 
-gulp.task('server:start', ['build:dev'], function () {
+gulp.task('server:start', ['es6-buildsfx'], function () {
 	"use strict";
 	server.listen({path: 'server/app.js'}, $gulp.livereload.listen);
 });
