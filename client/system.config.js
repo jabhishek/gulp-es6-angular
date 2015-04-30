@@ -5,6 +5,7 @@ System.config({
 		'components/angular-ui-router/release/angular-ui-router': {deps: ['angular']},
 		'components/angular-aria/angular-aria': {deps: ['angular']},
 		'components/angular-material/angular-material': {deps: ['angular']},
+		'components/angular-mocks/angular-mocks': {deps: ['angular']},
 		'components/angular-touch/angular-touch': {deps: ['angular']},
 		'components/angular-animate/angular-animate': {deps: ['angular']}
 	},
@@ -15,6 +16,7 @@ System.config({
 		'angular-aria': 'components/angular-aria/angular-aria',
 		'angular-touch': 'components/angular-touch/angular-touch',
 		'angular-material': 'components/angular-material/angular-material',
-		'text': 'components/plugin-text/text'
+		'angular-mocks': 'components/angular-mocks/angular-mocks',
+		'text': 'ext/plugin-text/text'
 	}
 });
