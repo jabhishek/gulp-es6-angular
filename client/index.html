@@ -13,8 +13,9 @@
 <body ng-cloak>
 
 <ui-view></ui-view>
-
+<script src="/build/vendors/vendors.js"></script>
 <!-- Dev - load individual es6 file, with system.js and module loader polyfill-->
+<!--
 <script src="/components/traceur/traceur.min.js"></script>
 <script src="/components/traceur-runtime/traceur-runtime.js"></script>
 <script src="/components/es6-module-loader/dist/es6-module-loader.src.js"></script>
@@ -23,8 +24,8 @@
 <script>
     System.import('app/bootstrap');
 </script>
-
+-->
 <!-- To load build files, created by builder.js -->
-<!--<script src="/build/scripts/app.js"></script>
+<script src="/build/scripts/app.js"></script>
 </body>
 </html>

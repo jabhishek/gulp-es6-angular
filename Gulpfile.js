@@ -6,6 +6,15 @@ var $gulp = require('gulp-load-plugins')({
 	lazy: false
 });
 
+var vendorJsFiles = [
+	'client/components/angular/angular.js',
+	'client/components/angular-ui-router/release/angular-ui-router.js',
+	'client/components/angular-aria/angular-aria.js',
+	'client/components/angular-material/angular-material.js',
+	'client/components/angular-touch/angular-touch.js',
+	'client/components/angular-animate/angular-animate.js'
+];
+
 function getBuilder() {
 	"use strict";
 	var builder = new Builder('./client/system.config.js');
@@ -29,6 +38,17 @@ gulp.task('css', function() {
 		.pipe($gulp.size({showFiles: false}));
 });
 
+gulp.task('vendors:js', function() {
+	"use strict";
+	return gulp.src(vendorJsFiles)
+		.pipe($gulp.concat('vendors.js'))
+		.pipe($gulp.uglify())
+		//.pipe(minify())
+		//.pipe($gulp.rev())
+		.pipe(gulp.dest('client/build/vendors/'))
+		.pipe($gulp.size({showFiles: false}));
+});
+
 
 gulp.task('jshint', function () {
 	return gulp.src(['client/app/**/*.js'])
@@ -44,23 +64,23 @@ gulp.task('es6-buildsfx', ['jshint'], function (cb) {
 	// Build a self-executing bundle (ie. Has SystemJS built in and auto-imports the 'app' module)
 	// gone back to build sfx file, although I am not happy with it... it was this or load systemjs and all other dependencies in browser
 	// https://github.com/systemjs/builder/issues/108
-	builder.buildSFX('app/bootstrap', 'client/build/scripts/app.js', {minify: true, sourceMaps: true, runtime: true});
+	builder.buildSFX('app/bootstrap', 'client/build/scripts/app.js', {minify: false, sourceMaps: false, runtime: true});
 	cb();
 });
 
 gulp.task('watch', function () {
 	"use strict";
 	gulp.watch(['client/content/**/*.less'], ['css']);
-	//gulp.watch(['client/app/**/*.js'], ['es6-buildsfx']);
+	gulp.watch(['client/app/**/*.js'], ['es6-buildsfx']);
 
 	gulp.watch([
-		'client/index.html', 'client/app/**/*', 'client/build/**/*'
+		'client/index.html', 'client/build/**/*'
 	], $gulp.livereload.changed);
 });
 
-gulp.task('build:dev', ['js', 'css']);
+gulp.task('build:dev', ['css', 'vendors:js', 'es6-buildsfx' ]);
 
-gulp.task('server:start', ['es6-buildsfx'], function () {
+gulp.task('server:start', ['build:dev'], function () {
 	"use strict";
 	server.listen({path: 'server/app.js'}, $gulp.livereload.listen);
 });

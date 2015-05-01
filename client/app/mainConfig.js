@@ -1,6 +1,4 @@
 import angular from 'angular';
-import 'angular-ui-router';
-
 
 export default angular.module('mainConfig', ['ui.router'])
 	.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', function ($stateProvider, $urlRouterProvider, $locationProvider) {
