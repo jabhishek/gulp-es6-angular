@@ -1,31 +1,26 @@
 module.exports = function(config){
     config.set({
 
-        basePath : './client',
+        basePath : './',
 
         files : [],
 
+        /*logLevel: 'LOG_WARN',*/
+
         systemjs: {
             files: [
-                'components/angular/angular.js',
-                'components/angular-ui-router/release/angular-ui-router.js',
-                'components/angular-mocks/angular-mocks.js',
-                'client/ext/plugin-text/text.js',
-                'app/*/**/*.js',
-                'app/*/**/*.html'
+                'client/app/*/**/*.js'
             ],
 
             // Point out where the SystemJS config file is
-            configFile: 'system.config.js',
+            configFile: 'client/system.config.js',
 
             // Add any additional configuration, such as mappings to modules only used in testing
             config: {
+                baseURL: "/",
                 transpiler: 'babel',
                 paths: {
-                    'babel': 'ext/babel-core/browser.js',
-                    'angular-mocks': 'components/angular-mocks/angular-mocks.js',
-                    'angular': 'components/angular/angular.js',
-                    'text': 'ext/plugin-text/text.js'
+                    'babel': 'client/ext/babel-core/browser.js'
                 }
             }
         },
@@ -41,12 +36,6 @@ module.exports = function(config){
             'karma-jasmine',
             'karma-phantomjs-launcher',
             'karma-junit-reporter'
-        ],
-
-        junitReporter : {
-            outputFile: 'test_out/unit.xml',
-            suite: 'unit'
-        }
-
+        ]
     });
 };

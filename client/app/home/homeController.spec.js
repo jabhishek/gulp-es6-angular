@@ -1,15 +1,20 @@
-import 'angular';
-import 'angular-ui-router';
-import 'angular-mocks';
-import './index';
+import HomeController from './HomeController';
 
 describe('homeController', function () {
-    beforeEach(angular.mock.module('homeModule'));
+    'use strict';
+    /*beforeEach(angular.mock.module('homeModule'));*/
 
-    it('should ....', inject(function($controller) {
+    it('should ....', function() {
+        //spec body
+        expect(HomeController).toBeDefined();
+    });
+/*    it('should ....', inject(function($controller) {
         //spec body
         var homeCtrl = $controller('HomeController');
         expect(homeCtrl).toBeDefined();
         expect(homeCtrl.users).toBeDefined();
-    }));
+    }));*/
 });
+
+
+
