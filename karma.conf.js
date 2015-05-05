@@ -9,18 +9,30 @@ module.exports = function(config){
 
         systemjs: {
             files: [
-                'client/app/*/**/*.js'
+                'client/components/angular/angular.js',
+                'client/components/angular-mocks/angular-mocks.js',
+                'client/ext/plugin-text/text.js',
+                'client/app/*/**/*.js',
+                'client/app/*/**/*.html'
             ],
 
             // Point out where the SystemJS config file is
-            configFile: 'client/system.config.js',
+            /*configFile: 'client/system.config.js',*/
 
             // Add any additional configuration, such as mappings to modules only used in testing
             config: {
                 baseURL: "/",
                 transpiler: 'babel',
                 paths: {
-                    'babel': 'client/ext/babel-core/browser.js'
+                    'babel': 'client/ext/babel-core/browser.js',
+                    'angular-mocks': 'client/components/angular-mocks/angular-mocks.js'
+                },
+                meta: {
+                    'client/components/angular/angular': {format: 'global', exports: 'angular'}
+                },
+                map: {
+                    'angular': 'client/components/angular/angular',
+                    'text': 'client/ext/plugin-text/text'
                 }
             }
         },
@@ -29,7 +41,7 @@ module.exports = function(config){
 
         frameworks: ['systemjs', 'jasmine'],
 
-        browsers : ['PhantomJS'],
+        browsers : ['Chrome'],
 
         plugins : ['karma-systemjs',
             'karma-chrome-launcher',
