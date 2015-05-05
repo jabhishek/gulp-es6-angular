@@ -1,6 +1,6 @@
 import angular from 'angular';
 
-import homeModule from './home/index';
+import homeModule from './home/homeModule';
 import mainConfig from './mainConfig';
 
 

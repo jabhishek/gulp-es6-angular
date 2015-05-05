@@ -64,7 +64,9 @@ gulp.task('es6-buildsfx', ['jshint'], function (cb) {
 	// Build a self-executing bundle (ie. Has SystemJS built in and auto-imports the 'app' module)
 	// gone back to build sfx file, although I am not happy with it... it was this or load systemjs and all other dependencies in browser
 	// https://github.com/systemjs/builder/issues/108
-	builder.buildSFX('app/bootstrap', 'client/build/scripts/app.js', {minify: false, sourceMaps: false, runtime: true});
+	// update - 05/05/2015 - still building sfx files, but vendor files are included as script tags and modules exposed as adapter modules
+	// https://github.com/systemjs/builder#adapter-modules
+	builder.buildSFX('app/bootstrap', 'client/build/scripts/app.js', {minify: true, sourceMaps: true, runtime: true});
 	cb();
 });
 
