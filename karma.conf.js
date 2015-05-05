@@ -3,13 +3,17 @@ module.exports = function(config){
 
         basePath : './',
 
-        files : [],
+        files : ['client/components/angular/angular.js',
+            'client/components/angular-animate/angular-animate.js',
+            'client/components/angular-aria/angular-aria.js',
+            'client/components/angular-material/angular-material.js',
+            'client/components/angular-touch/angular-touch.js',
+            'client/components/angular-ui-router/release/angular-ui-router.js'],
 
         /*logLevel: 'LOG_WARN',*/
 
         systemjs: {
             files: [
-                'client/components/angular/angular.js',
                 'client/components/angular-mocks/angular-mocks.js',
                 'client/ext/plugin-text/text.js',
                 'client/app/*/**/*.js',
@@ -17,22 +21,15 @@ module.exports = function(config){
             ],
 
             // Point out where the SystemJS config file is
-            /*configFile: 'client/system.config.js',*/
+            configFile: 'client/system.config.js',
 
             // Add any additional configuration, such as mappings to modules only used in testing
             config: {
-                baseURL: "/",
+                baseURL: "/client/",
                 transpiler: 'babel',
                 paths: {
-                    'babel': 'client/ext/babel-core/browser.js',
-                    'angular-mocks': 'client/components/angular-mocks/angular-mocks.js'
-                },
-                meta: {
-                    'client/components/angular/angular': {format: 'global', exports: 'angular'}
-                },
-                map: {
-                    'angular': 'client/components/angular/angular',
-                    'text': 'client/ext/plugin-text/text'
+                    'babel': 'ext/babel-core/browser.js',
+                    'angular-mocks': 'components/angular-mocks/angular-mocks.js'
                 }
             }
         },
@@ -41,7 +38,7 @@ module.exports = function(config){
 
         frameworks: ['systemjs', 'jasmine'],
 
-        browsers : ['Chrome'],
+        browsers : ['PhantomJS'],
 
         plugins : ['karma-systemjs',
             'karma-chrome-launcher',
