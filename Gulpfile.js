@@ -57,6 +57,13 @@ gulp.task('jshint', function () {
 		.pipe($gulp.jshint.reporter('default'));
 });
 
+gulp.task('es6-node', function (cb) {
+	"use strict";
+	return gulp.src('server/es6/**/*.js')
+		.pipe($gulp.babel())
+		.pipe(gulp.dest('server/es5'));
+});
+
 gulp.task('es6-buildsfx', ['jshint'], function (cb) {
 	"use strict";
 	var builder = getBuilder();
@@ -72,6 +79,7 @@ gulp.task('es6-buildsfx', ['jshint'], function (cb) {
 
 gulp.task('watch', function () {
 	"use strict";
+	gulp.watch(['server/es6/**/*.js'], ['es6-node']);
 	gulp.watch(['client/content/**/*.less'], ['css']);
 	gulp.watch(['client/app/**/*.js'], ['es6-buildsfx']);
 
@@ -82,9 +90,18 @@ gulp.task('watch', function () {
 
 gulp.task('build:dev', ['css', 'vendors:js', 'es6-buildsfx' ]);
 
-gulp.task('server:start', ['build:dev'], function () {
+gulp.task('server:start', ['es6-node', 'build:dev'], function () {
 	"use strict";
-	server.listen({path: 'server/app.js'}, $gulp.livereload.listen);
+	server.listen({path: 'server/es5/app.js'}, $gulp.livereload.listen);
 });
 
-gulp.task('default', ['server:start', 'watch']);
+gulp.task('default', ['server:start', 'watch'], function() {
+
+	function restart( file ) {
+		server.changed( function( error ) {
+			if( ! error ) $gulp.livereload.changed( file.path );
+		});
+	}
+
+	gulp.watch( ['server/es5/**/*.js'] ).on( 'change', restart );
+});
