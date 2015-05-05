@@ -166,6 +166,14 @@ select {
   content: " ";
   clear: both;
 }
+[ng\:cloak],
+[ng-cloak],
+[data-ng-cloak],
+[x-ng-cloak],
+.ng-cloak,
+.x-ng-cloak {
+  display: none !important;
+}
 html {
   font-family: Raleway, Tahoma, Helvetica, sans-serif;
   background-color: #fdfdfd;
