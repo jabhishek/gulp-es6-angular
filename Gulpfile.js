@@ -6,6 +6,7 @@ var $gulp = require('gulp-load-plugins')({
 	lazy: false
 });
 var runSequence = require('run-sequence');
+var exec = require('child_process').exec;
 
 var vendorJsFiles = [
 	'client/components/angular/angular.js',
@@ -50,12 +51,22 @@ gulp.task('vendors:js', function() {
 		.pipe($gulp.size({showFiles: false}));
 });
 
+/* Run gulp test:server --harmony */
 gulp.task('test:server', function() {
 	"use strict";
 	return gulp.src('server/**/*.spec.js')
 		.pipe($gulp.mocha({reporter: 'spec'}))
 		.on('error', $gulp.util.log);
 
+});
+
+gulp.task('test:server:exec', function(cb) {
+	"use strict";
+	exec('gulp test:server --harmony', function (err, stdout, stderr) {
+		console.log(stdout);
+		console.log(stderr);
+		cb(err);
+	});
 });
 
 
@@ -66,7 +77,7 @@ gulp.task('jshint', function () {
 		.pipe($gulp.jshint.reporter('default'));
 });
 
-gulp.task('es6-buildsfx', ['jshint'], function (cb) {
+gulp.task('es6', ['jshint'], function (cb) {
 	"use strict";
 	var builder = getBuilder();
 
@@ -81,10 +92,10 @@ gulp.task('es6-buildsfx', ['jshint'], function (cb) {
 
 gulp.task('watch', function () {
 	"use strict";
-	gulp.watch(['server/**/*.js'], ['test:server']);
+	gulp.watch(['server/**/*.js'], ['test:server:exec']);
 	gulp.watch(['server/**/*.js'], ['server:restart']);
 	gulp.watch(['client/content/**/*.less'], ['css']);
-	gulp.watch(['client/app/**/*.js'], ['es6-buildsfx']);
+	gulp.watch(['client/app/**/*.js'], ['es6']);
 
 	gulp.watch([
 		'client/index.html', 'client/build/**/*'
@@ -98,11 +109,11 @@ gulp.task('server:restart', function () {
 	});
 });
 
-gulp.task('build:dev', ['css', 'vendors:js', 'es6-buildsfx' ]);
+gulp.task('build:dev', ['css', 'vendors:js', 'es6' ]);
 
 gulp.task('server:start', ['build:dev'], function () {
 	"use strict";
-	server.listen({path: 'server/app.js'}, $gulp.livereload.listen);
+	server.listen({path: 'server/app.js', execArgv: ['--harmony', '--use_strict']}, $gulp.livereload.listen);
 });
 
 gulp.task('default', function () {

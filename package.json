@@ -4,7 +4,8 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node --harmony --use_strict server/app.js "
   },
   "author": "",
   "license": "ISC",
@@ -30,6 +31,7 @@
     "gulp-babel": "^5.1.0",
     "gulp-concat": "^2.5.2",
     "gulp-develop-server": "^0.4.2",
+    "gulp-exec": "^2.1.1",
     "gulp-gzip": "^1.1.0",
     "gulp-jshint": "^1.10.0",
     "gulp-less": "^3.0.3",

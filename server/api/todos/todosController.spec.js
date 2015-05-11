@@ -1,8 +1,11 @@
+// use strict is required to make let keyword work
+"use strict";
+
 var chai = require("chai");
 var expect = chai.expect;
 var sinon = require("sinon");
 var MockTodo = require("../models/todos.model.mock");
-var todosController = require("./todosController")(MockTodo);
+let todosController = require("./todosController")(MockTodo);
 
 describe("todosController", function () {
 	"use strict";
