@@ -1,20 +1,32 @@
+import angular from 'angular';
+import 'angular-mocks';
+import 'app/common/services/TodoService';
+import './HomeController';
 
-// unit test HomeController class - no angular involvement
+describe('homeController', function () {
+	'use strict';
+	beforeEach(angular.mock.module('homeControllerModule'));
+	beforeEach(angular.mock.module('TodoServiceModule'));
 
-import HomeController from './HomeController';
+	describe('homeController', function () {
+		var homeCtrl, TodoService, $q;
 
-describe('HomeController', function () {
-    'use strict';
-    var homeController;
-    beforeEach(function() {
-        homeController = new HomeController();
-    });
+		beforeEach(inject(function (_TodoService_, _$q_) {
+			TodoService = _TodoService_;
+			$q = _$q_;
+		}));
 
-    it('should be defined', function() {
-        expect(homeController).toBeDefined();
-    });
-    it('should have users defined', function() {
-        expect(homeController.users).toBeDefined();
-        expect(homeController.users.length).toEqual(4);
-    });
+		it('should be defined', inject(function ($controller) {
+			homeCtrl = $controller('HomeController', {todosData: []});
+			expect(homeCtrl).toBeDefined();
+		}));
+
+		it('should set tasks', inject(function ($controller) {
+			var todos = [ {task: '111'}];
+			homeCtrl = $controller('HomeController', {todosData: { data: todos }});
+			expect(homeCtrl.todos.length).toBe(1);
+			expect(homeCtrl.todos).toBe(todos);
+		}));
+	});
 });
+

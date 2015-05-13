@@ -1,3 +1,7 @@
-<div>{{ vm.users }}</div>
+<md-container>
+    <md-list>
+        <md-list-item ng-repeat="todo in vm.todos"><div>{{ todo.task }}</div></md-list-item>
+    </md-list>
+</md-container>
 
-<a ui-sref="view2">View2</a>
+<a ui-sref="view2">View</a>

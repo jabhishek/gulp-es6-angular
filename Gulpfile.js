@@ -29,7 +29,7 @@ function getBuilder() {
 	return builder;
 }
 
-gulp.task('css', function() {
+gulp.task('css', function () {
 	"use strict";
 	return gulp.src(['client/content/app.less'])
 		.pipe($gulp.less())
@@ -40,7 +40,7 @@ gulp.task('css', function() {
 		.pipe($gulp.size({showFiles: false}));
 });
 
-gulp.task('vendors:js', function() {
+gulp.task('vendors:js', function () {
 	"use strict";
 	return gulp.src(vendorJsFiles)
 		.pipe($gulp.concat('vendors.js'))
@@ -52,7 +52,7 @@ gulp.task('vendors:js', function() {
 });
 
 /* Run gulp test:server --harmony */
-gulp.task('test:server', function() {
+gulp.task('test:server', function () {
 	"use strict";
 	return gulp.src('server/**/*.spec.js')
 		.pipe($gulp.mocha({reporter: 'spec'}))
@@ -60,7 +60,7 @@ gulp.task('test:server', function() {
 
 });
 
-gulp.task('test:server:exec', function(cb) {
+gulp.task('test:server:exec', function (cb) {
 	"use strict";
 	exec('gulp test:server --harmony', function (err, stdout, stderr) {
 		console.log(stdout);
@@ -68,7 +68,6 @@ gulp.task('test:server:exec', function(cb) {
 		cb(err);
 	});
 });
-
 
 gulp.task('jshint', function () {
 	return gulp.src(['client/app/**/*.js'])
@@ -86,7 +85,11 @@ gulp.task('es6', ['jshint'], function (cb) {
 	// https://github.com/systemjs/builder/issues/108
 	// update - 05/05/2015 - still building sfx files, but vendor files are included as script tags and modules exposed as adapter modules
 	// https://github.com/systemjs/builder#adapter-modules
-	builder.buildSFX('app/bootstrap', 'client/build/scripts/app.js', {minify: true, sourceMaps: true, runtime: true});
+	builder.buildSFX('app/bootstrap', 'client/build/scripts/app.js', {minify: true, sourceMaps: true, runtime: true})
+		.catch(function (err) {
+			console.log('Build error');
+			console.log(err);
+		});
 	cb();
 });
 
@@ -95,7 +98,7 @@ gulp.task('watch', function () {
 	gulp.watch(['server/**/*.js'], ['test:server:exec']);
 	gulp.watch(['server/**/*.js'], ['server:restart']);
 	gulp.watch(['client/content/**/*.less'], ['css']);
-	gulp.watch(['client/app/**/*.js'], ['es6']);
+	gulp.watch(['client/app/**/*.js', 'client/app/**/*.html'], ['es6']);
 
 	gulp.watch([
 		'client/index.html', 'client/build/**/*'
@@ -103,13 +106,13 @@ gulp.task('watch', function () {
 });
 // restart server if app.js changed
 gulp.task('server:restart', function () {
-		//server.restart();
-	server.changed( function( error ) {
-		if( ! error ) $gulp.livereload.changed();
+	//server.restart();
+	server.changed(function (error) {
+		if (!error) $gulp.livereload.changed();
 	});
 });
 
-gulp.task('build:dev', ['css', 'vendors:js', 'es6' ]);
+gulp.task('build:dev', ['css', 'vendors:js', 'es6']);
 
 gulp.task('server:start', ['build:dev'], function () {
 	"use strict";

@@ -1,8 +1,11 @@
 class HomeController {
-	constructor() {
-		this.users = ['Abhishek', 'Paul', 'Adrian', 'Barney'];
+	constructor(todosData) {
+		this.todos = todosData.data;
 	}
 }
 
-export default HomeController;
+HomeController.$inject = ['todosData'];
+
+export default angular.module('homeControllerModule', [])
+	.controller('HomeController', HomeController);
 
