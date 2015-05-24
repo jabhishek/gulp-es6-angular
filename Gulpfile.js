@@ -95,7 +95,7 @@ gulp.task('es6', ['jshint'], function (cb) {
 
 gulp.task('watch', function () {
 	"use strict";
-	gulp.watch(['server/**/*.js'], ['test:server:exec']);
+	/*gulp.watch(['server/!**!/!*.js'], ['test:server']);*/
 	gulp.watch(['server/**/*.js'], ['server:restart']);
 	gulp.watch(['client/content/**/*.less'], ['css']);
 	gulp.watch(['client/app/**/*.js', 'client/app/**/*.html'], ['es6']);

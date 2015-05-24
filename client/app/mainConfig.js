@@ -6,12 +6,13 @@ export default angular.module('mainConfig', ['ui.router'])
 		$animateProvider.classNameFilter(/animate/);
 		// disable debug info in html (example, disables insertion of classes like ng-scope, ng-binding)
 		$compileProvider.debugInfoEnabled(false);
+/*
 		$stateProvider
-			// todo-abhi demo view - remove later
 			.state('view2', {
 				url: '/view2',
 				template: '<div>View 2</div><br/><a ui-sref="home">Home</a>'
 			});
+*/
 
 		$urlRouterProvider.otherwise('/');
 		$locationProvider.html5Mode({
