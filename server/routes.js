@@ -1,6 +1,7 @@
 module.exports = function (app) {
 	"use strict";
 	app.use('/api/todos', require('./api/todos'));
+	app.use('/api/users', require('./api/user'));
 
 	// All other routes should redirect to the index.html
 	app.route('/*')

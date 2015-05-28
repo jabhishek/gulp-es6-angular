@@ -1,10 +1,20 @@
 // use strict is required to make let keyword work
 "use strict";
 
+var MockTodo = function () {
+};
+MockTodo.prototype.save = function() {
+	"use strict";
+	console.log("original save");
+};
+MockTodo.find = function (condition, select, cb) {
+	console.log("original find");
+	cb();
+};
+
 var chai = require("chai");
 var expect = chai.expect;
 var sinon = require("sinon");
-var MockTodo = require("../models/todos.model.mock");
 let todosController = require("./todosController")(MockTodo);
 
 describe("todosController", function () {
