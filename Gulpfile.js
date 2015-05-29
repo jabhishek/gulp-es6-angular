@@ -9,12 +9,12 @@ var runSequence = require('run-sequence');
 var exec = require('child_process').exec;
 
 var vendorJsFiles = [
-	'client/components/angular/angular.js',
-	'client/components/angular-ui-router/release/angular-ui-router.js',
-	'client/components/angular-aria/angular-aria.js',
-	'client/components/angular-material/angular-material.js',
-	'client/components/angular-touch/angular-touch.js',
-	'client/components/angular-animate/angular-animate.js'
+	'client/bower_components/angular/angular.js',
+	'client/bower_components/angular-ui-router/release/angular-ui-router.js',
+	'client/bower_components/angular-aria/angular-aria.js',
+	'client/bower_components/angular-material/angular-material.js',
+	'client/bower_components/angular-touch/angular-touch.js',
+	'client/bower_components/angular-animate/angular-animate.js'
 ];
 
 function getBuilder() {
