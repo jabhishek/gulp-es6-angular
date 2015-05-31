@@ -31,7 +31,7 @@ function getBuilder() {
 
 gulp.task('css', function () {
 	"use strict";
-	return gulp.src(['client/content/app.less'])
+	return gulp.src(['client/assets/app.less'])
 		.pipe($gulp.less())
 		.pipe($gulp.autoprefixer())
 		//.pipe(minify())
@@ -97,7 +97,7 @@ gulp.task('watch', function () {
 	"use strict";
 	/*gulp.watch(['server/!**!/!*.js'], ['test:server']);*/
 	gulp.watch(['server/**/*.js'], ['server:restart']);
-	gulp.watch(['client/content/**/*.less'], ['css']);
+	gulp.watch(['client/assets/**/*.less'], ['css']);
 	gulp.watch(['client/app/**/*.js', 'client/app/**/*.html'], ['es6']);
 
 	gulp.watch([
