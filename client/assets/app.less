@@ -2,7 +2,6 @@
  * app.less
  * Created by ajain on 27/04/2015.
  */
-
 @import 'globals/lesshat.less';
 @import 'globals/variables.less';
 @import 'globals/mixins.less';
@@ -24,7 +23,7 @@ html {
   background-color: @page-background;
   color: #555;
   color: @text-color;
-  font-size: 50%;
+  font-size: 62.5%;
   height: 100%;
   min-width: 300px;
 
@@ -33,6 +32,17 @@ html {
   }
 }
 
-body{
+body {
   .font-size(1.6);
 }
+
+.view {
+  padding: @genericPadding;
+  display: block;
+}
+
+md-content {
+  overflow: hidden;
+}
+
+@import '../app/common/components/ajNavbar/ajNavbar';
