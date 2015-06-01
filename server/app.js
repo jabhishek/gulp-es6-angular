@@ -1,4 +1,5 @@
 "use strict";
+var uri = require('./config/environment').mongo.uri;
 
 var express = require('express');
 var path = require("path");
@@ -11,11 +12,14 @@ let rootPath = path.normalize(__dirname + '/..');
 var appPath;
 
 var app = express();
+
+console.log(app.get('env'));
+
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 var mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost:27017/test');
+mongoose.connect(uri);
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', function (callback) {
@@ -23,7 +27,7 @@ db.once('open', function (callback) {
 });
 
 if (app.get("env") === "development") {
- //   app.use(morgan('dev'));
+    app.use(morgan('dev'));
     app.use(require('connect-livereload')());
     appPath = path.join(rootPath, 'client');
 }

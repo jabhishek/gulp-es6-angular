@@ -5,7 +5,7 @@ var userSchema = mongoose.Schema({
 	email: String,
 	hashedPassword: String,
 	provider: {type: String, default: 'local'},
-	role: {type: String, default: 'parent'},
+	role: {type: String, default: 'user'},
 	salt: String,
 	createdOn: {type: Date, default: Date.now}
 });
