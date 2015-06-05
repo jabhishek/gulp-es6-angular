@@ -12,3 +12,8 @@ http://blog.overzealous.com/post/74121048393/why-you-shouldnt-create-a-gulp-plug
 
 ### ES6 support in node
 https://github.com/joyent/node/wiki/ES6-(a.k.a.-Harmony)-Features-Implemented-in-V8-and-Available-in-Node
+
+### Authentication layer
+https://scotch.io/tutorials/authenticate-a-node-js-api-with-json-web-tokens
+http://passportjs.org/docs/authenticate
+https://www.npmjs.com/package/jsonwebtoken

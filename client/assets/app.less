@@ -38,11 +38,24 @@ body {
 
 .view {
   padding: @genericPadding;
-  display: block;
+  min-height: calc(~'100% - @{navbar-height}');
+}
+
+md-toolbar {
+  min-height: @navbar-height;
 }
 
 md-content {
   overflow: hidden;
 }
 
+md-whiteframe {
+  padding: 2rem;
+}
+
+md-input-container.md-default-theme label, md-input-container.md-default-theme .md-placeholder {
+  color: rgba(0, 0, 0, 0.6);
+}
+
 @import '../app/common/components/ajNavbar/ajNavbar';
+@import '../app/login/login';

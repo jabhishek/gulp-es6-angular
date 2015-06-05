@@ -1,0 +1,32 @@
+<md-content class="form-container" layout="column" layout-fill layout-align="center center">
+    <md-whiteframe class="md-whiteframe-z3" layout="column">
+        <form id="loginform" name="loginform" class="form login-form" novalidate
+              ng-submit="loginVm.submitForm(loginVm.user, loginform.$valid)">
+            <h2 class="md-display-1">Login</h2>
+            <fieldset>
+                <span class="error-message" ng-if="loginVm.error">{{loginVm.error.message}}</span>
+
+                <div class="field" layout="column" layout-align="center start">
+                    <md-input-container>
+                        <label for="userid">User Id</label>
+                        <input type="text" id="userid" name="userid" required maxlength="50" minlength="6"
+                                  ng-model="loginVm.user.userid"/>
+                    </md-input-container>
+                </div>
+                <div class="field" layout="column" layout-align="center start">
+                    <md-input-container>
+                        <label for="password">Password</label>
+                        <input type="password" id="password" name="password" required maxlength="50"
+                                  ng-model="loginVm.user.password"/>
+                    </md-input-container>
+                </div>
+                <div layout="row" layout-align="center center">
+                    <md-button type="submit" class="md-raised md-primary button">Login</md-button>
+                </div>
+            </fieldset>
+        </form>
+    </md-whiteframe>
+
+    <div>{{ loginform.username }}</div>
+</md-content>
+
