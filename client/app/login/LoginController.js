@@ -1,9 +1,9 @@
-import 'app/common/models/User';
+import 'app/common/models/CurrentUser';
 import 'app/common/services/AuthService';
 
 class LoginController {
-	constructor(User, $state, AuthService) {
-		this.User = User;
+	constructor(CurrentUser, $state, AuthService) {
+		this.CurrentUser = CurrentUser;
 
 		this.user = {
 			userid: '',
@@ -19,8 +19,8 @@ class LoginController {
 			this.AuthService.login(user)
 				.then((response) => {
 					if (response && response.data) {
-						angular.merge(this.User, this.user);
-						this.User.token = response.data.token;
+						angular.merge(this.CurrentUser, this.user);
+						this.CurrentUser.token = response.data.token;
 					}
 					this.$state.go('home');
 				})
@@ -33,7 +33,7 @@ class LoginController {
 	}
 }
 
-LoginController.$inject = ['User', '$state', 'AuthService'];
-export default angular.module('loginControllerModule', ['UserModule', 'AuthServiceModule'])
+LoginController.$inject = ['CurrentUser', '$state', 'AuthService'];
+export default angular.module('loginControllerModule', ['CurrentUserModule', 'AuthServiceModule'])
 	.controller('LoginController', LoginController);
 

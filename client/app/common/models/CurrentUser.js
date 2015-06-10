@@ -1,4 +1,4 @@
-class User {
+class CurrentUser {
 	constructor() {
 		this.userid = '';
 		this.password = '';
@@ -11,5 +11,5 @@ class User {
 
 }
 
-export default angular.module('UserModule', [])
-	.service('User', User);
+export default angular.module('CurrentUserModule', [])
+	.service('CurrentUser', CurrentUser);

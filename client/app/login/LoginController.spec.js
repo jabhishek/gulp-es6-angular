@@ -1,7 +1,7 @@
 import angular from 'angular';
 import 'angular-mocks';
 import './LoginController';
-import 'app/common/models/User';
+import 'app/common/models/CurrentUser';
 
 describe('LoginController', function () {
 	'use strict';
@@ -11,7 +11,7 @@ describe('LoginController', function () {
 	beforeEach(angular.mock.module('ui.router'));
 	beforeEach(angular.mock.module('loginControllerModule'));
 
-	beforeEach(angular.mock.module('UserModule'));
+	beforeEach(angular.mock.module('CurrentUserModule'));
 	beforeEach(angular.mock.module('AuthServiceModule'));
 
 	var correctUser = {userid: 'goodUser'};
@@ -26,13 +26,13 @@ describe('LoginController', function () {
 
 	beforeEach(function () {
 		module(function ($provide) {
-			$provide.service('User', MockUser);
+			$provide.service('CurrentUser', MockUser);
 		});
 	});
 
-	beforeEach(inject(function (_$state_, _User_, _AuthService_, _$q_) {
+	beforeEach(inject(function (_$state_, _CurrentUser_, _AuthService_, _$q_) {
 		$state = _$state_;
-		User = _User_;
+		User = _CurrentUser_;
 		AuthService = _AuthService_;
 		$q = _$q_;
 	}));

@@ -1,24 +1,24 @@
 import template from './ajNavbar.html!text';
-import 'app/common/models/User';
+import 'app/common/models/CurrentUser';
 
 // changed from using es6 class to plain old function -- feels more readable
 
-function ajNavbar(User) {
+function ajNavbar(CurrentUser) {
 	'use strict';
 	let ajNavbarObj = {
 		restrict: 'E',
 		template: template,
 		controllerAs: 'navbarVm',
 		controller: function() {
-			this.user = User;
-			console.log(this.user, 'user');
+			this.currentUser = CurrentUser;
+			console.log(this.currentUser, 'user');
 		}
 	};
 
 	return ajNavbarObj;
 }
 
-ajNavbar.$inject = ['User'];
+ajNavbar.$inject = ['CurrentUser'];
 
-export default angular.module('ajNavbarModule', ['UserModule'])
+export default angular.module('ajNavbarModule', ['CurrentUserModule'])
 	.directive('ajNavbar', ajNavbar);

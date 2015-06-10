@@ -2,7 +2,7 @@
     <div class="navbar-header" layout="row" flex>
         <h1 flex><a ui-sref="home">Todo</a></h1>
         <div>
-            <span class="user-info" ng-if="navbarVm.user.isLoggedIn">{{navbarVm.user.userid }}</span>
+            <span class="user-info" ng-if="navbarVm.currentUser.isLoggedIn">{{navbarVm.currentUser.userid }}</span>
         </div>
     </div>
 </md-toolbar>
