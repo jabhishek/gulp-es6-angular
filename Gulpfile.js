@@ -14,7 +14,8 @@ var vendorJsFiles = [
 	'client/bower_components/angular-aria/angular-aria.js',
 	'client/bower_components/angular-material/angular-material.js',
 	'client/bower_components/angular-touch/angular-touch.js',
-	'client/bower_components/angular-animate/angular-animate.js'
+	'client/bower_components/angular-animate/angular-animate.js',
+	'client/bower_components/angular-messages/angular-messages.js'
 ];
 
 function getBuilder() {
@@ -44,7 +45,7 @@ gulp.task('vendors:js', function () {
 	"use strict";
 	return gulp.src(vendorJsFiles)
 		.pipe($gulp.concat('vendors.js'))
-		.pipe($gulp.uglify())
+		//.pipe($gulp.uglify())
 		//.pipe(minify())
 		//.pipe($gulp.rev())
 		.pipe(gulp.dest('client/build/vendors/'))

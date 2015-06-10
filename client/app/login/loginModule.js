@@ -5,6 +5,7 @@ import loginTemplate from './login.html!text';
 var loginModule = angular.module('loginModule',
 	[
 		'ui.router',
+		'ngMessages',
 		loginControllerModule.name
 	])
 	.config([

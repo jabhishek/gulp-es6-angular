@@ -3,6 +3,8 @@
         <form id="loginform" name="loginform" class="form login-form" novalidate
               ng-submit="loginVm.submitForm(loginVm.user, loginform.$valid)">
             <h2 class="md-display-1">Login</h2>
+
+
             <fieldset>
                 <span class="error-message" ng-if="loginVm.error">{{loginVm.error.message}}</span>
 
@@ -10,23 +12,40 @@
                     <md-input-container>
                         <label for="userid">User Id</label>
                         <input type="text" id="userid" name="userid" required maxlength="50" minlength="6"
-                                  ng-model="loginVm.user.userid"/>
+                               ng-model="loginVm.user.userid"/>
+
+                        <div class="error-messages" ng-messages="loginform.userid.$error" role="alert"
+                             ng-if="loginform.$submitted">
+                            <div ng-message="required">Please enter an user id.</div>
+                            <div ng-message="minlength">User id entered is too small.</div>
+                            <div ng-message="maxlength">User id entered is too long.</div>
+                        </div>
                     </md-input-container>
                 </div>
                 <div class="field" layout="column" layout-align="center start">
                     <md-input-container>
                         <label for="password">Password</label>
                         <input type="password" id="password" name="password" required maxlength="50"
-                                  ng-model="loginVm.user.password"/>
+                               ng-model="loginVm.user.password"/>
+                        <div class="error-messages" ng-messages="loginform.password.$error" role="alert"
+                             ng-if="loginform.$submitted">
+                            <div ng-message="required">Please enter a password</div>
+                        </div>
                     </md-input-container>
                 </div>
                 <div layout="row" layout-align="center center">
-                    <md-button type="submit" class="md-raised md-primary button">Login</md-button>
+                    <md-button type="submit" class="md-raised md-primary button">
+                        Login
+                    </md-button>
                 </div>
             </fieldset>
         </form>
     </md-whiteframe>
 
-    <div>{{ loginform.username }}</div>
+    <div>
+        <!--<pre>{{ loginform | json }}</pre>-->
+        <pre>{{ loginVm.user }}</pre>
+        <pre>{{ loginVm.user.isLoggedIn }}</pre>
+    </div>
 </md-content>
 
