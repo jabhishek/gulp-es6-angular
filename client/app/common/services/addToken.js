@@ -15,7 +15,7 @@ function addToken(CurrentUser, $q) {
 	};
 }
 
-addToken.$inject = ['CurrentUser', '$q'];
+addToken.$inject = ['CurrentUser', '$q', '$location'];
 
 export default angular.module('addTokeneModule', ['CurrentUserModule'])
 	.factory('addToken', addToken);

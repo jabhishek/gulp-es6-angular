@@ -1,8 +1,13 @@
 import angular from 'angular';
 import addTokenModule from 'app/common/services/addToken';
+import loginRedirectModule from 'app/common/services/loginRedirect';
 
-export default angular.module('mainConfig', ['ui.router', addTokenModule.name])
-	.config([
+export default angular.module('mainConfig', [
+		'ui.router',
+		addTokenModule.name,
+		loginRedirectModule.name
+	]
+).config([
 		'$stateProvider', '$urlRouterProvider', '$locationProvider', '$animateProvider', '$compileProvider', '$mdThemingProvider', '$httpProvider',
 		function ($stateProvider, $urlRouterProvider, $locationProvider, $animateProvider, $compileProvider, $mdThemingProvider, $httpProvider) {
 			'use strict';
@@ -14,6 +19,7 @@ export default angular.module('mainConfig', ['ui.router', addTokenModule.name])
 				.primaryPalette('blue');
 
 			$httpProvider.interceptors.push('addToken');
+			$httpProvider.interceptors.push('loginRedirect');
 
 			$urlRouterProvider.otherwise('/');
 			$locationProvider.html5Mode({

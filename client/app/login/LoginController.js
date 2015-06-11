@@ -2,7 +2,7 @@
 import 'app/common/services/AuthService';
 
 class LoginController {
-	constructor($state, AuthService) {
+	constructor($state, AuthService, loginRedirect) {
 		this.user = {
 			userid: '',
 			password: ''
@@ -10,13 +10,14 @@ class LoginController {
 
 		this.$state = $state;
 		this.AuthService = AuthService;
+		this.loginRedirect = loginRedirect;
 	}
 
 	submitForm(user, isValid) {
 		if (isValid) {
 			this.AuthService.login(user)
 				.then(() => {
-					this.$state.go('home');
+					this.loginRedirect.redirectPostLogin();
 				})
 				.catch((err) => {
 					if (err && err.data) {
@@ -27,7 +28,7 @@ class LoginController {
 	}
 }
 
-LoginController.$inject = ['$state', 'AuthService'];
+LoginController.$inject = ['$state', 'AuthService', 'loginRedirect'];
 export default angular.module('loginControllerModule', ['AuthServiceModule'])
 	.controller('LoginController', LoginController);
 
