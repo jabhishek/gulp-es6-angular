@@ -2,7 +2,7 @@ import angular from 'angular';
 import 'angular-mocks';
 import './AuthService';
 
-describe('TodoService', function () {
+describe('AuthService', function () {
 	/* global afterEach */
 	'use strict';
 	beforeEach(angular.mock.module('AuthServiceModule'));
@@ -43,8 +43,16 @@ describe('TodoService', function () {
 			expect(promise.$$state.status).toEqual(0);
 			$httpBackend.flush();
 			expect(promise.$$state.status).toEqual(1);
-			expect(promise.$$state.value.data).toEqual({ token: 'someToken'});
-			expect(promise.$$state.value.status).toEqual(200);
+		}));
+
+		it('should set current user http post is successful', inject(function (AuthService, CurrentUser) {
+			$httpBackend.expectPOST(url);
+			var promise = AuthService.login(correctUser);
+			expect(promise.$$state.status).toEqual(0);
+			$httpBackend.flush();
+
+			expect(promise.$$state.status).toEqual(1);
+			expect(CurrentUser.token).toEqual('someToken');
 		}));
 	});
 });

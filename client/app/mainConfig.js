@@ -1,9 +1,10 @@
 import angular from 'angular';
+import addTokenModule from 'app/common/services/addToken';
 
-export default angular.module('mainConfig', ['ui.router'])
+export default angular.module('mainConfig', ['ui.router', addTokenModule.name])
 	.config([
-		'$stateProvider', '$urlRouterProvider', '$locationProvider', '$animateProvider', '$compileProvider', '$mdThemingProvider',
-		function ($stateProvider, $urlRouterProvider, $locationProvider, $animateProvider, $compileProvider, $mdThemingProvider) {
+		'$stateProvider', '$urlRouterProvider', '$locationProvider', '$animateProvider', '$compileProvider', '$mdThemingProvider', '$httpProvider',
+		function ($stateProvider, $urlRouterProvider, $locationProvider, $animateProvider, $compileProvider, $mdThemingProvider, $httpProvider) {
 			'use strict';
 			$animateProvider.classNameFilter(/animate/);
 			// disable debug info in html (example, disables insertion of classes like ng-scope, ng-binding)
@@ -11,6 +12,8 @@ export default angular.module('mainConfig', ['ui.router'])
 
 			$mdThemingProvider.theme('default')
 				.primaryPalette('blue');
+
+			$httpProvider.interceptors.push('addToken');
 
 			$urlRouterProvider.otherwise('/');
 			$locationProvider.html5Mode({

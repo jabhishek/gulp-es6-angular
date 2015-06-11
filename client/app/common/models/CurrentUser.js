@@ -9,6 +9,12 @@ class CurrentUser {
 		return !!this.token;
 	}
 
+	set(user, token) {
+		this.userid = user.userid;
+		this.password = user.password;
+		this.token = token;
+	}
+
 }
 
 export default angular.module('CurrentUserModule', [])

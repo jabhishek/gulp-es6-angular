@@ -1,38 +1,19 @@
-import angular from 'angular';
 import 'angular-mocks';
 import './LoginController';
-import 'app/common/models/CurrentUser';
 
 describe('LoginController', function () {
 	'use strict';
-	/*global spyOn */
-	var $state, User, AuthService, $q;
+	/*global spyOn  */
+	var $state, AuthService, $q;
 
 	beforeEach(angular.mock.module('ui.router'));
 	beforeEach(angular.mock.module('loginControllerModule'));
 
-	beforeEach(angular.mock.module('CurrentUserModule'));
-	beforeEach(angular.mock.module('AuthServiceModule'));
-
 	var correctUser = {userid: 'goodUser'};
 	var incorrectUser = {userid: 'badUser'};
 
-	class MockUser {
-		constructor() {
-			this.userid = 'user';
-			this.password = 'password';
-		}
-	}
-
-	beforeEach(function () {
-		module(function ($provide) {
-			$provide.service('CurrentUser', MockUser);
-		});
-	});
-
-	beforeEach(inject(function (_$state_, _CurrentUser_, _AuthService_, _$q_) {
+	beforeEach(inject(function (_$state_, _AuthService_, _$q_) {
 		$state = _$state_;
-		User = _CurrentUser_;
 		AuthService = _AuthService_;
 		$q = _$q_;
 	}));
@@ -72,7 +53,6 @@ describe('LoginController', function () {
 				LoginCtrl.submitForm(correctUser, true);
 				$rootScope.$apply();
 
-				expect(User.token).toEqual('someToken');
 				expect($state.go).toHaveBeenCalledWith('home');
 			}));
 
