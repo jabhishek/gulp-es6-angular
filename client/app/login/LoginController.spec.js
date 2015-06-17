@@ -1,21 +1,23 @@
 import 'angular-mocks';
 import './LoginController';
+import 'app/common/services/loginRedirect';
 
 describe('LoginController', function () {
 	'use strict';
 	/*global spyOn  */
-	var $state, AuthService, $q;
+	var AuthService, $q, loginRedirect;
 
 	beforeEach(angular.mock.module('ui.router'));
 	beforeEach(angular.mock.module('loginControllerModule'));
+	beforeEach(angular.mock.module('loginRedirectModule'));
 
 	var correctUser = {userid: 'goodUser'};
 	var incorrectUser = {userid: 'badUser'};
 
-	beforeEach(inject(function (_$state_, _AuthService_, _$q_) {
-		$state = _$state_;
+	beforeEach(inject(function (_AuthService_, _$q_, _loginRedirect_) {
 		AuthService = _AuthService_;
 		$q = _$q_;
+		loginRedirect = _loginRedirect_;
 	}));
 
 	describe('LoginController', function () {
@@ -41,30 +43,30 @@ describe('LoginController', function () {
 				expect(AuthService.login).toHaveBeenCalledWith(correctUser);
 			}));
 			it('should not call AuthService.login if form is invalid', inject(function ($controller) {
-				spyOn(AuthService, 'login').and.returnValue($q.when(true));
+				spyOn(AuthService, 'login');
 				LoginCtrl = $controller('LoginController');
 				LoginCtrl.submitForm(correctUser, false);
 				expect(AuthService.login).not.toHaveBeenCalled();
 			}));
 			it('should go to home page if login is successful', inject(function ($controller, $rootScope) {
 				spyOn(AuthService, 'login').and.returnValue($q.when({data: { token: 'someToken'}}));
-				spyOn($state, 'go').and.returnValue('');
+				spyOn(loginRedirect, 'redirectPostLogin');
 				LoginCtrl = $controller('LoginController');
 				LoginCtrl.submitForm(correctUser, true);
 				$rootScope.$apply();
 
-				expect($state.go).toHaveBeenCalledWith('home');
+				expect(loginRedirect.redirectPostLogin).toHaveBeenCalled();
 			}));
 
 			it('should not go to home page if login fails', inject(function ($controller, $rootScope) {
 				spyOn(AuthService, 'login').and.returnValue($q.reject());
-				spyOn($state, 'go').and.returnValue('');
+				spyOn(loginRedirect, 'redirectPostLogin');
 				LoginCtrl = $controller('LoginController');
 				LoginCtrl.submitForm(incorrectUser, true);
 
 				$rootScope.$apply();
 
-				expect($state.go).not.toHaveBeenCalled();
+				expect(loginRedirect.redirectPostLogin).not.toHaveBeenCalled();
 			}));
 
 		});

@@ -20,6 +20,7 @@ function loginRedirect($q, $location, $timeout) {
 	var redirectPostLogin = function redirectPostLogin() {
 		$timeout(function () {
 			$location.path(lastPath);
+			lastPath = "/";
 		});
 	};
 

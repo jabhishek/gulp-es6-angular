@@ -15,7 +15,8 @@ var vendorJsFiles = [
 	'client/bower_components/angular-material/angular-material.js',
 	'client/bower_components/angular-touch/angular-touch.js',
 	'client/bower_components/angular-animate/angular-animate.js',
-	'client/bower_components/angular-messages/angular-messages.js'
+	'client/bower_components/angular-messages/angular-messages.js',
+	'client/bower_components/angular-local-storage/dist/angular-local-storage.js'
 ];
 
 function getBuilder() {

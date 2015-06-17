@@ -45,14 +45,14 @@ describe('AuthService', function () {
 			expect(promise.$$state.status).toEqual(1);
 		}));
 
-		it('should set current user http post is successful', inject(function (AuthService, CurrentUser) {
+		it('should set current user if http post is successful', inject(function (AuthService, CurrentUser) {
 			$httpBackend.expectPOST(url);
 			var promise = AuthService.login(correctUser);
 			expect(promise.$$state.status).toEqual(0);
 			$httpBackend.flush();
 
 			expect(promise.$$state.status).toEqual(1);
-			expect(CurrentUser.token).toEqual('someToken');
+			expect(CurrentUser.profile.token).toEqual('someToken');
 		}));
 	});
 });

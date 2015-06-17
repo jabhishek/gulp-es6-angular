@@ -5,7 +5,7 @@ function addToken(CurrentUser, $q) {
 	var request = function request(config) {
 		console.log(config);
 		if (CurrentUser.isLoggedIn) {
-			config.headers.Authorization = 'Bearer ' + CurrentUser.token;
+			config.headers.Authorization = 'Bearer ' + CurrentUser.profile.token;
 		}
 		return $q.when(config);
 	};
