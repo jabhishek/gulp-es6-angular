@@ -1,5 +1,8 @@
 import StorageFactoryModule from 'app/common/services/StorageFactory';
-
+var defaultUser = {
+	userid: '',
+	token: ''
+};
 class CurrentUser {
 	constructor(StorageFactory) {
 		this.storageKey = 'user_loggedin';
@@ -11,13 +14,10 @@ class CurrentUser {
 		function initializeUser() {
 			var userFromStorage = StorageFactory.get(this.storageKey);
 			// used != so that it covers both null and undefined
-			if (userFromStorage != null) {
+			if (userFromStorage != null && userFromStorage.token) {
 				return userFromStorage;
 			} else {
-				return {
-					userid: '',
-					token: ''
-				};
+				return defaultUser;
 			}
 		}
 

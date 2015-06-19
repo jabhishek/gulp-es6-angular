@@ -5,36 +5,64 @@ import './CurrentUser';
 describe('CurrentUser', function () {
 	"use strict";
 	/* global spyOn */
-	var user = {userid: 'abc', token: 'token'};
+	var correctUser = {userid: 'abc', token: 'token'};
+	var defaultUser = {userid: '', token: ''};
 
-	var storageFactoryMock = {
-		get: function () {
-			console.log('mocked get');
-			return user;
-		},
-		put: function (key, newUser) {
-			console.log('mocked put');
-			user = newUser;
-		},
-		remove: function () {
-			console.log('mocked remove');
-			user = undefined;
-		}
-	};
+	function createStorageFactoryMock(userInStorage) {
+		return {
+			get: function () {
+				return userInStorage;
+			},
+			put: function (key, newUser) {
+				userInStorage = newUser;
+			},
+			remove: function () {
+				userInStorage = undefined;
+			}
+		};
+	}
 
-	beforeEach(function () {
+	function createUserModule(user = correctUser) {
 		angular.mock.module('StorageFactoryModule');
 		module(function ($provide) {
-			$provide.value('StorageFactory', storageFactoryMock);
+			$provide.value('StorageFactory', createStorageFactoryMock(user));
 		});
 		angular.mock.module('CurrentUserModule');
+	}
+
+	it('should Initialize User from storageFactory if already exists in storage', function () {
+		createUserModule();
+		inject(function (CurrentUser) {
+			expect(CurrentUser.profile).toEqual(correctUser);
+		});
 	});
 
-	it('should Initialize User from local storage if already exists there', inject(function (CurrentUser) {
-		expect(CurrentUser.profile).toEqual(user);
-	}));
+	it('should Initialize default user if user not present in storage', function () {
+		createUserModule(null);
+		inject(function (CurrentUser) {
+			expect(CurrentUser.profile).toEqual(defaultUser);
+		});
+	});
+
+	it('should Initialize default user if user present in storage but does not have tokan', function () {
+		createUserModule({user: 'aa'});
+		inject(function (CurrentUser) {
+			expect(CurrentUser.profile).toEqual(defaultUser);
+		});
+	});
+
+	it('should Initialize default user if user present in storage but does not have tokan', function () {
+		createUserModule({user: 'aa', token: ""});
+		inject(function (CurrentUser) {
+			expect(CurrentUser.profile).toEqual(defaultUser);
+		});
+	});
 
 	describe('isLoggedIn', function () {
+		beforeEach(function () {
+			createUserModule();
+		});
+
 		it('should return true if token is set', inject(function (CurrentUser) {
 			CurrentUser.profile = {token: 'abc'};
 			expect(CurrentUser.isLoggedIn).toEqual(true);
@@ -47,6 +75,10 @@ describe('CurrentUser', function () {
 	});
 
 	describe('set', function () {
+		beforeEach(function () {
+			createUserModule();
+		});
+
 		it('should set user if user is passed', inject(function (CurrentUser) {
 			CurrentUser.set({userid: 'x'}, 'y');
 			expect(CurrentUser.profile.userid).toEqual('x');
@@ -57,7 +89,7 @@ describe('CurrentUser', function () {
 			spyOn(StorageFactory, 'put');
 			CurrentUser.storageKey = 'key';
 			CurrentUser.set({userid: 'x'}, 'y');
-			expect(StorageFactory.put).toHaveBeenCalledWith('key', { userid: 'x', token: 'y'});
+			expect(StorageFactory.put).toHaveBeenCalledWith('key', {userid: 'x', token: 'y'});
 		}));
 	});
 });

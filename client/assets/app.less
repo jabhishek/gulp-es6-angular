@@ -36,9 +36,13 @@ body {
   .font-size(1.6);
 }
 
+body > .container {
+  min-height: calc(~'100% - @{navbar-height}');
+}
+
 .view {
   padding: @genericPadding;
-  min-height: calc(~'100% - @{navbar-height}');
+  height: 100%;
 }
 
 md-toolbar {
@@ -56,6 +60,40 @@ md-whiteframe {
 md-input-container.md-default-theme label, md-input-container.md-default-theme .md-placeholder {
   color: rgba(0, 0, 0, 0.6);
 }
+
+
+.alerts {
+  height: 200px;
+  border-top: 2px solid #ccc;
+  overflow: scroll;
+
+  .alert {
+    padding: 0.5rem 0;
+    margin: 1rem 0;
+    border-radius: 1rem;
+
+    &.alert-info {
+      color: #31708f;
+      background-color: #d9edf7;
+    }
+
+    &.alert-success {
+      background-color: #dff0d8;
+      color: #3c763d;
+    }
+
+    &.alert-danger {
+      color: #a94442;
+      background-color: #f2dede;
+    }
+
+    &.alert-warning {
+      color: #8a6d3b;
+      background-color: #fcf8e3;
+    }
+  }
+}
+
 
 @import '../app/common/components/ajNavbar/ajNavbar';
 @import '../app/login/login';

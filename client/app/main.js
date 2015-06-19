@@ -4,7 +4,7 @@ import homeModule from './home/homeModule';
 import loginModule from './login/loginModule';
 import ajNavbarModule from './common/components/ajNavbar/ajNavbar';
 import mainConfig from './mainConfig';
-
+import alertsModule from 'app/common/components/alerts/alerts';
 
 export var mainModule = angular.module('mainModule',
 	[
@@ -15,5 +15,6 @@ export var mainModule = angular.module('mainModule',
 		homeModule.name,
 		mainConfig.name,
 		loginModule.name,
-    ajNavbarModule.name
+    ajNavbarModule.name,
+		alertsModule.name
 	]);

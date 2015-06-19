@@ -21,9 +21,10 @@
 <body ng-cloak>
 
 <aj-navbar></aj-navbar>
-
-<ui-view class="view" layout></ui-view>
-
+<div class="container" layout="column">
+    <ui-view class="view" flex layout></ui-view>
+    <alerts class="alerts" ></alerts>
+</div>
 <script src="/build/vendors/vendors.js"></script>
 <!-- Dev - load individual es6 file, with system.js and module loader polyfill-->
 <!--<script src="/bower_components/traceur/traceur.min.js"></script>

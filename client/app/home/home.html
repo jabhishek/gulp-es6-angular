@@ -1,7 +1,9 @@
 <md-content>
     <md-list>
-        <md-list-item ng-repeat="todo in vm.todos">
+        <md-list-item ng-repeat="todo in vm.todos track by todo.task">
             <todo-item todo="todo"></todo-item>
         </md-list-item>
     </md-list>
+
+
 </md-content>
